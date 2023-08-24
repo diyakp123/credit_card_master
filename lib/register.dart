@@ -41,8 +41,18 @@ class RegisterState extends State<Register> {
 
       print(response.body);
 
-      if (response.statusCode == 400) {
+      if (response.statusCode == 400 || response.statusCode == 401) {
+        print(response.statusCode);
         setState(() {
+        //   Navigator.pushAndRemoveUntil(context,
+        //       MaterialPageRoute(builder: (BuildContext context) {
+        //     return Scaffold(
+        //       body: CreditCardsPage(),
+        //     );
+        //   }),
+        //       ModalRoute.withName(
+        //           '/') // Replace this with your root screen's route name (usually '/')
+        //       );
           _isLoginFailed = true;
         });
       } else {
@@ -103,7 +113,7 @@ class RegisterState extends State<Register> {
               ),
               if (_isLoginFailed)
                 Text(
-                  "email already taken",
+                  "email or password invalid or already taken",
                   style: TextStyle(color: Colors.red),
                 ),
                  Align(
